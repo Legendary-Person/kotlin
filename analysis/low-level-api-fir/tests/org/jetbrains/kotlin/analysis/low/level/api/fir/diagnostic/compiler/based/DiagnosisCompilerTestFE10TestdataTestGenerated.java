@@ -13792,6 +13792,12 @@ public class DiagnosisCompilerTestFE10TestdataTestGenerated extends AbstractDiag
             }
 
             @Test
+            @TestMetadata("smartCastFork.kt")
+            public void testSmartCastFork() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inference/smartCastFork.kt");
+            }
+
+            @Test
             @TestMetadata("specialCallsWithCallableReferences.kt")
             public void testSpecialCallsWithCallableReferences() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inference/specialCallsWithCallableReferences.kt");
@@ -36539,6 +36545,12 @@ public class DiagnosisCompilerTestFE10TestdataTestGenerated extends AbstractDiag
             @TestMetadata("kt4975.kt")
             public void testKt4975() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/inference/kt4975.kt");
+            }
+
+            @Test
+            @TestMetadata("plusAssignOnArrayList.kt")
+            public void testPlusAssignOnArrayList() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/inference/plusAssignOnArrayList.kt");
             }
 
             @Test
