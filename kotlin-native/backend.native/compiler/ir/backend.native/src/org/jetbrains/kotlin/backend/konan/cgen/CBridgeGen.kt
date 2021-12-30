@@ -1106,7 +1106,7 @@ private class ObjCBlockPointerValuePassing(
                 Name.identifier(stubs.getUniqueKotlinFunctionReferenceClassName("BlockFunctionImpl")),
                 ClassKind.CLASS, DescriptorVisibilities.PRIVATE, Modality.FINAL,
                 isCompanion = false, isInner = false, isData = false, isExternal = false,
-                isInline = false, isExpect = false, isFun = false
+                isInline = false, isValue = false, isExpect = false, isFun = false
         )
         irClass.createParameterDeclarations()
 

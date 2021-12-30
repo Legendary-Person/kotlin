@@ -94,8 +94,13 @@ class Fir2IrLazyClass(
     override val isExternal: Boolean
         get() = fir.isExternal
 
+    private fun hasSinglePrimaryConstructorParameter() = fir.primaryConstructorIfAny(session)?.valueParameterSymbols?.size == 1
+
     override val isInline: Boolean
-        get() = fir.isInline && fir.primaryConstructorIfAny(session)?.valueParameterSymbols?.size == 1
+        get() = fir.isInline && hasSinglePrimaryConstructorParameter()
+
+    override val isValue: Boolean
+        get() = fir.isInline && !hasSinglePrimaryConstructorParameter()
 
     override val isExpect: Boolean
         get() = fir.isExpect

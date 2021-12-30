@@ -98,6 +98,7 @@ class FirElementSerializer private constructor(
 
         val regularClass = klass as? FirRegularClass
         val modality = regularClass?.modality ?: Modality.FINAL
+        val hasSinglePrimaryConstructor = regularClass?.primaryConstructorIfAny(session)?.valueParameterSymbols?.size == 1
         val flags = Flags.getClassFlags(
             klass.nonSourceAnnotations(session).isNotEmpty(),
             ProtoEnumFlags.visibility(regularClass?.let { normalizeVisibility(it) } ?: Visibilities.Local),
@@ -107,7 +108,8 @@ class FirElementSerializer private constructor(
             regularClass?.isData == true,
             regularClass?.isExternal == true,
             regularClass?.isExpect == true,
-            regularClass?.isInline == true,
+            regularClass?.isInline == true && hasSinglePrimaryConstructor,
+            regularClass?.isInline == true && !hasSinglePrimaryConstructor,
             regularClass?.isFun == true
         )
         if (flags != builder.flags) {

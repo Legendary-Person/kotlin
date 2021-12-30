@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.isInlineClass
+import org.jetbrains.kotlin.resolve.isValueClass
 import org.jetbrains.kotlin.types.KotlinType
 
 val ParameterDescriptor.indexOrMinusOne: Int
@@ -39,5 +40,6 @@ fun IrFactory.createIrClassFromDescriptor(
 ): IrClass = createClass(
     startOffset, endOffset, origin, symbol, name, descriptor.kind, visibility, modality,
     descriptor.isCompanionObject, descriptor.isInner, descriptor.isData, descriptor.isEffectivelyExternal(),
-    descriptor.isInlineClass(), descriptor.isExpect, descriptor.isFun, descriptor.source
+    descriptor.isInlineClass(), descriptor.isValueClass() && !descriptor.isInlineClass(),
+    descriptor.isExpect, descriptor.isFun, descriptor.source
 )

@@ -18,6 +18,7 @@ class IrClassBuilder : IrDeclarationBuilder() {
     var isData: Boolean = false
     var isExternal: Boolean = false
     var isInline: Boolean = false
+    var isValue: Boolean = false
     var isExpect: Boolean = false
     var isFun: Boolean = false
 

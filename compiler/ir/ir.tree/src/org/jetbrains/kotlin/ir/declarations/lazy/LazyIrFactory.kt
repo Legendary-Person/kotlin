@@ -34,6 +34,7 @@ class LazyIrFactory(
         isData: Boolean,
         isExternal: Boolean,
         isInline: Boolean,
+        isValue: Boolean,
         isExpect: Boolean,
         isFun: Boolean,
         source: SourceElement
@@ -42,7 +43,7 @@ class LazyIrFactory(
     else
         delegate.createClass(
             startOffset, endOffset, origin, symbol, name, kind, visibility, modality,
-            isCompanion, isInner, isData, isExternal, isInline, isExpect, isFun, source
+            isCompanion, isInner, isData, isExternal, isInline, isValue, isExpect, isFun, source
         )
 
     override fun createConstructor(

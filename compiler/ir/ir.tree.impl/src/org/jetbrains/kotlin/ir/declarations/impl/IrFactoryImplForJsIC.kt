@@ -59,6 +59,7 @@ class IrFactoryImplForJsIC(override val stageController: StageController) : Abst
         isData: Boolean,
         isExternal: Boolean,
         isInline: Boolean,
+        isValue: Boolean,
         isExpect: Boolean,
         isFun: Boolean,
         source: SourceElement
@@ -77,6 +78,7 @@ class IrFactoryImplForJsIC(override val stageController: StageController) : Abst
             isData,
             isExternal,
             isInline,
+            isValue,
             isExpect,
             isFun,
             source,

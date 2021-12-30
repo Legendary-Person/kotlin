@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
-import org.jetbrains.kotlin.ir.util.transformInPlace
 import org.jetbrains.kotlin.ir.util.transformIfNeeded
+import org.jetbrains.kotlin.ir.util.transformInPlace
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
@@ -40,6 +40,7 @@ abstract class IrClass :
     abstract val isInner: Boolean
     abstract val isData: Boolean
     abstract val isInline: Boolean
+    abstract val isValue: Boolean
     abstract val isExpect: Boolean
     abstract val isFun: Boolean
 

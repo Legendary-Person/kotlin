@@ -274,6 +274,7 @@ class Fir2IrClassifierStorage(
         val signature = if (regularClass.isLocal) null else signatureComposer.composeSignature(regularClass)
         val irClass = regularClass.convertWithOffsets { startOffset, endOffset ->
             declareIrClass(signature) { symbol ->
+                val hasSinglePrimaryConstructorParameter = regularClass.primaryConstructorIfAny(session)?.valueParameterSymbols?.size == 1
                 irFactory.createClass(
                     startOffset,
                     endOffset,
@@ -287,7 +288,8 @@ class Fir2IrClassifierStorage(
                     isInner = regularClass.isInner,
                     isData = regularClass.isData,
                     isExternal = regularClass.isExternal,
-                    isInline = regularClass.isInline && regularClass.primaryConstructorIfAny(session)?.valueParameterSymbols?.size == 1,
+                    isInline = regularClass.isInline && hasSinglePrimaryConstructorParameter,
+                    isValue = regularClass.isInline && !hasSinglePrimaryConstructorParameter,
                     isExpect = regularClass.isExpect,
                     isFun = regularClass.isFun
                 ).apply {

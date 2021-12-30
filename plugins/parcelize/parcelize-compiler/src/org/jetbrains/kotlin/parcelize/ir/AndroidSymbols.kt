@@ -521,12 +521,14 @@ class AndroidSymbols(
         shortName: String,
         classKind: ClassKind,
         classModality: Modality,
-        isInlineClass: Boolean = false
+        isInlineClass: Boolean = false,
+        isValueClass: Boolean = false,
     ): IrClassSymbol = irFactory.buildClass {
         name = Name.identifier(shortName)
         kind = classKind
         modality = classModality
         isInline = isInlineClass
+        isValue = isValueClass
     }.apply {
         parent = irPackage
         createImplicitParameterDeclarationWithWrappedDescriptor()

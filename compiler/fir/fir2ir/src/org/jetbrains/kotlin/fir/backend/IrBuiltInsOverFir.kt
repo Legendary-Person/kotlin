@@ -666,7 +666,7 @@ class IrBuiltInsOverFir(
                         build()
                         irFactory.createClass(
                             startOffset, endOffset, origin, symbol, name, kind, visibility, modality,
-                            isCompanion, isInner, isData, isExternal, isInline, isExpect, isFun
+                            isCompanion, isInner, isData, isExternal, isInline, isValue, isExpect, isFun
                         )
                     }.also {
                         it.parent = parent
@@ -719,6 +719,7 @@ class IrBuiltInsOverFir(
         classKind: ClassKind = ClassKind.CLASS,
         classModality: Modality = Modality.OPEN,
         classIsInline: Boolean = false,
+        classIsValue: Boolean = false,
         builderBlock: IrClassBuilder.() -> Unit = {},
         block: IrClass.() -> Unit = {}
     ): IrClassSymbol = components.symbolTable.declareClass(
@@ -730,11 +731,12 @@ class IrBuiltInsOverFir(
                 kind = classKind
                 modality = classModality
                 isInline = classIsInline
+                isValue = classIsValue
                 origin = IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB
                 builderBlock()
                 irFactory.createClass(
                     startOffset, endOffset, origin, symbol, name, kind, visibility, modality,
-                    isCompanion, isInner, isData, isExternal, isInline, isExpect, isFun
+                    isCompanion, isInner, isData, isExternal, isInline, isValue, isExpect, isFun
                 )
             }.also {
                 it.parent = this

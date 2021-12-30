@@ -38,13 +38,17 @@ open class IrClassImpl(
     override var isInner: Boolean = false,
     override val isData: Boolean = false,
     override val isExternal: Boolean = false,
-    override val isInline: Boolean = false,
+    final override val isInline: Boolean = false,
+    final override val isValue: Boolean = false,
     override val isExpect: Boolean = false,
     override val isFun: Boolean = false,
     override val source: SourceElement = SourceElement.NO_SOURCE,
     override val factory: IrFactory = IrFactoryImpl
 ) : IrClass() {
     init {
+        require(!isValue || !isInline) {
+            "IrClass should either be value or inline, but not both: $name (isValue=$isValue, isInline=$isInline)"
+        }
         symbol.bind(this)
     }
 

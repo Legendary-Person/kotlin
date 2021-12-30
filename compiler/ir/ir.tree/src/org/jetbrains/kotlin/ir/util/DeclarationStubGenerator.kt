@@ -31,6 +31,7 @@ import org.jetbrains.kotlin.ir.symbols.impl.IrValueParameterSymbolImpl
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.isInlineClass
+import org.jetbrains.kotlin.resolve.isValueClass
 import org.jetbrains.kotlin.resolve.scopes.getDescriptorsFiltered
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 import org.jetbrains.kotlin.types.KotlinType
@@ -270,6 +271,7 @@ abstract class DeclarationStubGenerator(
                 isData = descriptor.isData,
                 isExternal = descriptor.isEffectivelyExternal(),
                 isInline = descriptor.isInlineClass(),
+                isValue = descriptor.isValueClass() && !descriptor.isInlineClass(),
                 isExpect = descriptor.isExpect,
                 isFun = descriptor.isFun,
                 stubGenerator = this,

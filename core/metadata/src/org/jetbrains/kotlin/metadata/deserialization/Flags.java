@@ -32,6 +32,7 @@ public class Flags {
     public static final BooleanFlagField IS_EXPECT_CLASS = FlagField.booleanAfter(IS_EXTERNAL_CLASS);
     public static final BooleanFlagField IS_INLINE_CLASS = FlagField.booleanAfter(IS_EXPECT_CLASS);
     public static final BooleanFlagField IS_FUN_INTERFACE = FlagField.booleanAfter(IS_INLINE_CLASS);
+    public static final BooleanFlagField IS_VALUE_CLASS = FlagField.booleanAfter(IS_FUN_INTERFACE);
 
     // Constructors
 
@@ -100,6 +101,7 @@ public class Flags {
             boolean isExternal,
             boolean isExpect,
             boolean isInline,
+            boolean isValue,
             boolean isFun
     ) {
         return HAS_ANNOTATIONS.toFlags(hasAnnotations)
@@ -112,6 +114,7 @@ public class Flags {
                | IS_EXPECT_CLASS.toFlags(isExpect)
                | IS_INLINE_CLASS.toFlags(isInline)
                | IS_FUN_INTERFACE.toFlags(isFun)
+               | IS_VALUE_CLASS.toFlags(isValue)
                 ;
     }
 

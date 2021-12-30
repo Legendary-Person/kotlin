@@ -152,6 +152,7 @@ internal class EnumSpecialDeclarationsFactory(val context: Context) {
                     isData = false,
                     isExternal = false,
                     isInline = false,
+                    isValue = false,
                     isExpect = false,
                     isFun = false
             ).apply {

@@ -85,6 +85,7 @@ class JvmSymbols(
         classKind: ClassKind = ClassKind.CLASS,
         classModality: Modality = Modality.FINAL,
         classIsInline: Boolean = false,
+        classIsValue: Boolean = false,
         block: (IrClass) -> Unit = {}
     ): IrClassSymbol =
         irFactory.buildClass {
@@ -92,6 +93,7 @@ class JvmSymbols(
             kind = classKind
             modality = classModality
             isInline = classIsInline
+            isValue = classIsValue
         }.apply {
             parent = when (fqName.parent().asString()) {
                 "kotlin" -> kotlinPackage

@@ -206,6 +206,7 @@ internal class FunctionReferenceLowering(val context: Context): FileLoweringPass
                     isData = false,
                     isExternal = false,
                     isInline = false,
+                    isValue = false,
                     isExpect = false,
                     isFun = false
             ).apply {

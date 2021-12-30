@@ -20,7 +20,6 @@ import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.types.typeWith
 import org.jetbrains.kotlin.ir.util.defaultType
-import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
@@ -132,6 +131,7 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
         classKind: ClassKind = ClassKind.CLASS,
         classModality: Modality = Modality.FINAL,
         classIsInline: Boolean = false,
+        classIsValue: Boolean = false,
         block: (IrClass) -> Unit = {}
     ): IrClassSymbol =
         context.irFactory.buildClass {
@@ -139,6 +139,7 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
             kind = classKind
             modality = classModality
             isInline = classIsInline
+            isValue = classIsValue
         }.apply {
             parent = javaLangReflectPackage
             createImplicitParameterDeclarationWithWrappedDescriptor()
