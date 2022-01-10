@@ -66,9 +66,6 @@ fun getDefaultJsr305Settings(configuredKotlinVersion: KotlinVersion = KotlinVers
 fun getDefaultMigrationJsr305ReportLevelForGivenGlobal(globalReportLevel: ReportLevel) =
     if (globalReportLevel == ReportLevel.WARN) null else globalReportLevel
 
-fun getDefaultReportLevelForAnnotation(annotationFqName: FqName) =
-    getReportLevelForAnnotation(annotationFqName, NullabilityAnnotationStates.EMPTY)
-
 fun getReportLevelForAnnotation(
     annotation: FqName,
     configuredReportLevels: NullabilityAnnotationStates<ReportLevel>,

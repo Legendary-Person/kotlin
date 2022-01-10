@@ -164,10 +164,12 @@ fun makeLazyJavaPackageFragmentProvider(
         storageManager, javaClassFinder, reflectKotlinClassFinder, deserializedDescriptorResolver,
         SignaturePropagator.DO_NOTHING, errorReporter, JavaResolverCache.EMPTY,
         JavaPropertyInitializerEvaluator.DoNothing, SamConversionResolverImpl(storageManager, emptyList()), javaSourceElementFactory,
-        singleModuleClassResolver, packagePartProvider, SupertypeLoopChecker.EMPTY, LookupTracker.DO_NOTHING, module,
-        ReflectionTypes(module, notFoundClasses), AnnotationTypeQualifierResolver(JavaTypeEnhancementState.DEFAULT),
+        singleModuleClassResolver, packagePartProvider, SupertypeLoopChecker.EMPTY,
+        LookupTracker.DO_NOTHING, module, ReflectionTypes(module, notFoundClasses),
+        AnnotationTypeQualifierResolver(JavaTypeEnhancementState.getDefault(KotlinVersion.CURRENT)),
         SignatureEnhancement(JavaTypeEnhancement(JavaResolverSettings.Default)),
-        JavaClassesTracker.Default, JavaResolverSettings.Default, NewKotlinTypeChecker.Default, JavaTypeEnhancementState.DEFAULT,
+        JavaClassesTracker.Default, JavaResolverSettings.Default, NewKotlinTypeChecker.Default,
+        JavaTypeEnhancementState.getDefault(KotlinVersion.CURRENT),
         object : JavaModuleAnnotationsProvider {
             override fun getAnnotationsForModuleOwnerOfClass(classId: ClassId): List<JavaAnnotation>? = null
         }

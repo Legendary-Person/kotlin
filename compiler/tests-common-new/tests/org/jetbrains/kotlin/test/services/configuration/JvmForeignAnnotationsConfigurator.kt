@@ -45,7 +45,6 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
     override val directiveContainers: List<DirectivesContainer>
         get() = listOf(ForeignAnnotationsDirectives)
 
-    @OptIn(ExperimentalStdlibApi::class)
     override fun provideAdditionalAnalysisFlags(
         directives: RegisteredDirectives,
         languageVersion: LanguageVersion
@@ -70,7 +69,7 @@ open class JvmForeignAnnotationsConfigurator(testServices: TestServices) : Envir
         return mapOf(
             JvmAnalysisFlags.javaTypeEnhancementState to JavaTypeEnhancementState(
                 Jsr305Settings(globalState, migrationState, userAnnotationsState),
-                getReportLevelForAnnotation = { getReportLevelForAnnotation(it, configuredReportLevels) }
+                getReportLevelForAnnotation = { getReportLevelForAnnotation(it, configuredReportLevels, languageVersion.toKotlinVersion()) }
             )
         )
     }

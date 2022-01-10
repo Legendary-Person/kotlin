@@ -8,11 +8,13 @@ package org.jetbrains.kotlin.test.frontend.classic.handlers
 import org.jetbrains.kotlin.codeMetaInfo.model.CodeMetaInfo
 import org.jetbrains.kotlin.codeMetaInfo.model.DiagnosticCodeMetaInfo
 import org.jetbrains.kotlin.codeMetaInfo.model.JspecifyMarkerCodeMetaInfo
+import org.jetbrains.kotlin.config.toKotlinVersion
 import org.jetbrains.kotlin.diagnostics.Errors
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.load.java.JSPECIFY_ANNOTATIONS_PACKAGE
+import org.jetbrains.kotlin.load.java.NullabilityAnnotationStates
 import org.jetbrains.kotlin.load.java.ReportLevel
-import org.jetbrains.kotlin.load.java.getDefaultReportLevelForAnnotation
+import org.jetbrains.kotlin.load.java.getReportLevelForAnnotation
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 import org.jetbrains.kotlin.test.directives.ForeignAnnotationsDirectives
 import org.jetbrains.kotlin.test.frontend.classic.ClassicFrontendOutputArtifact
@@ -29,7 +31,11 @@ private fun TestServices.generateJspecifyMetadataInfos(
     module: TestModule, files: Iterable<TestFile>, diagnosticKind: (CodeMetaInfo) -> Any?
 ) {
     val jspecifyMode = module.directives[ForeignAnnotationsDirectives.JSPECIFY_STATE].singleOrNull()
-        ?: getDefaultReportLevelForAnnotation(JSPECIFY_ANNOTATIONS_PACKAGE)
+        ?: getReportLevelForAnnotation(
+            JSPECIFY_ANNOTATIONS_PACKAGE,
+            NullabilityAnnotationStates.EMPTY,
+            module.languageVersionSettings.languageVersion.toKotlinVersion()
+        )
     val diagnosticsToJspecifyMarksForMode = diagnosticsToJspecifyMarks[jspecifyMode] ?: return
 
     for (testFile in files) {

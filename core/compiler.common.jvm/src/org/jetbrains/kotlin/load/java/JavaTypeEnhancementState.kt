@@ -14,7 +14,10 @@ class JavaTypeEnhancementState(
     val disabledDefaultAnnotations = jsr305.isDisabled || getReportLevelForAnnotation(JSPECIFY_ANNOTATIONS_PACKAGE) == ReportLevel.IGNORE
 
     companion object {
-        val DEFAULT = JavaTypeEnhancementState(getDefaultJsr305Settings(), ::getDefaultReportLevelForAnnotation)
+        fun getDefault(kotlinVersion: KotlinVersion): JavaTypeEnhancementState =
+            JavaTypeEnhancementState(getDefaultJsr305Settings()) {
+                getReportLevelForAnnotation(it, NullabilityAnnotationStates.EMPTY, kotlinVersion)
+            }
     }
 
     override fun toString(): String {
