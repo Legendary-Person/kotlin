@@ -55,6 +55,7 @@ public:
     ~NoOpGC() = default;
 
     GCScheduler& scheduler() noexcept { return scheduler_; }
+    void StopFinalizerThreadForTests() noexcept {}
 
 private:
     GCScheduler scheduler_;
