@@ -356,6 +356,11 @@ internal class AbstractSuperCallImpl(
     override val token: ValidityToken,
 ) : KtFirDiagnostic.AbstractSuperCall(), KtAbstractFirDiagnostic<PsiElement>
 
+internal class AbstractSuperCallWarningImpl(
+    override val firDiagnostic: KtPsiDiagnostic,
+    override val token: ValidityToken,
+) : KtFirDiagnostic.AbstractSuperCallWarning(), KtAbstractFirDiagnostic<PsiElement>
+
 internal class InstanceAccessBeforeSuperCallImpl(
     override val target: String,
     override val firDiagnostic: KtPsiDiagnostic,
@@ -2162,11 +2167,13 @@ internal class WrongSetterParameterTypeImpl(
 ) : KtFirDiagnostic.WrongSetterParameterType(), KtAbstractFirDiagnostic<KtTypeReference>
 
 internal class DelegateUsesExtensionPropertyTypeParameterErrorImpl(
+    override val usedTypeParameter: KtTypeParameterSymbol,
     override val firDiagnostic: KtPsiDiagnostic,
     override val token: ValidityToken,
 ) : KtFirDiagnostic.DelegateUsesExtensionPropertyTypeParameterError(), KtAbstractFirDiagnostic<KtProperty>
 
 internal class DelegateUsesExtensionPropertyTypeParameterWarningImpl(
+    override val usedTypeParameter: KtTypeParameterSymbol,
     override val firDiagnostic: KtPsiDiagnostic,
     override val token: ValidityToken,
 ) : KtFirDiagnostic.DelegateUsesExtensionPropertyTypeParameterWarning(), KtAbstractFirDiagnostic<KtProperty>

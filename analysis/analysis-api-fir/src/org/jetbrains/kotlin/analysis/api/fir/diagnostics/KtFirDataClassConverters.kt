@@ -392,6 +392,12 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirErrors.ABSTRACT_SUPER_CALL_WARNING) { firDiagnostic ->
+        AbstractSuperCallWarningImpl(
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
     add(FirErrors.INSTANCE_ACCESS_BEFORE_SUPER_CALL) { firDiagnostic ->
         InstanceAccessBeforeSuperCallImpl(
             firDiagnostic.a,
@@ -2541,12 +2547,14 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
     }
     add(FirErrors.DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER.errorFactory) { firDiagnostic ->
         DelegateUsesExtensionPropertyTypeParameterErrorImpl(
+            firSymbolBuilder.classifierBuilder.buildTypeParameterSymbol(firDiagnostic.a.fir),
             firDiagnostic as KtPsiDiagnostic,
             token,
         )
     }
     add(FirErrors.DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER.warningFactory) { firDiagnostic ->
         DelegateUsesExtensionPropertyTypeParameterWarningImpl(
+            firSymbolBuilder.classifierBuilder.buildTypeParameterSymbol(firDiagnostic.a.fir),
             firDiagnostic as KtPsiDiagnostic,
             token,
         )
