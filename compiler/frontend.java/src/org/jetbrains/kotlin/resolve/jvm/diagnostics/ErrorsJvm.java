@@ -13,6 +13,8 @@ import org.jetbrains.kotlin.name.FqName;
 import org.jetbrains.kotlin.psi.*;
 import org.jetbrains.kotlin.types.KotlinType;
 
+import java.util.List;
+
 import static org.jetbrains.kotlin.diagnostics.PositioningStrategies.*;
 import static org.jetbrains.kotlin.diagnostics.Severity.ERROR;
 import static org.jetbrains.kotlin.diagnostics.Severity.WARNING;
@@ -165,7 +167,7 @@ public interface ErrorsJvm {
             UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION_BASED_ON_JAVA_ANNOTATIONS
             = DiagnosticFactory3.create(WARNING);
 
-    DiagnosticFactory1<KtElement, KotlinType> NULLABLE_TYPE_PARAMETER_AGAINST_NOT_NULL_TYPE_PARAMETER
+    DiagnosticFactory1<KtElement, TypeParameterDescriptor> NULLABLE_TYPE_PARAMETER_AGAINST_NOT_NULL_TYPE_PARAMETER
             = DiagnosticFactory1.create(WARNING);
 
     DiagnosticFactory1<KtElement, KotlinType> RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS
@@ -173,6 +175,10 @@ public interface ErrorsJvm {
 
     DiagnosticFactory2<KtModifierListOwner, CallableMemberDescriptor, CallableMemberDescriptor> WRONG_NULLABILITY_FOR_JAVA_OVERRIDE =
             DiagnosticFactory2.create(WARNING, OVERRIDE_MODIFIER);
+
+    DiagnosticFactory3<KtModifierListOwner, TypeParameterDescriptor, CallableMemberDescriptor, CallableMemberDescriptor> WRONG_TYPE_PARAMETER_NULLABILITY_FOR_JAVA_OVERRIDE =
+            DiagnosticFactory3.create(WARNING, OVERRIDE_MODIFIER);
+
     DiagnosticFactory1<KtAnnotationEntry, String> ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR = DiagnosticFactory1.create(WARNING);
 
     DiagnosticFactory1<PsiElement, String> SUSPENSION_POINT_INSIDE_MONITOR = DiagnosticFactory1.create(ERROR);

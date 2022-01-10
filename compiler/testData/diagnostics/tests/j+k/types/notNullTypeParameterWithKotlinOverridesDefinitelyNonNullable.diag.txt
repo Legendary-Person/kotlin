@@ -1,0 +1,12 @@
+/main.kt:23:5: warning: type parameter 'X' has nullable upper bound, so override 'fun takeV(x: X): Unit' has incorrect nullability in its signature comparing with overridden 'fun takeV(value: X): Unit'
+    override fun takeV(x: X)
+    ^
+/main.kt:24:5: warning: type parameter 'E1' has nullable upper bound, so override 'fun <E1> takeE(e: E1): Unit' has incorrect nullability in its signature comparing with overridden 'fun <E : Any!> takeE(value: E): Unit'
+    override fun <E1> takeE(e: E1)
+    ^
+/main.kt:26:5: warning: type parameter 'X' has nullable upper bound, so override 'fun takeVList(l: List<X>): Unit' has incorrect nullability in its signature comparing with overridden 'fun takeVList(value: (Mutable)List<X>): Unit'
+    override fun takeVList(l: List<X>)
+    ^
+/main.kt:27:5: warning: type parameter 'E2' has nullable upper bound, so override 'fun <E2> takeEList(l2: List<E2>): Unit' has incorrect nullability in its signature comparing with overridden 'fun <E : Any!> takeEList(value: (Mutable)List<E>): Unit'
+    override fun <E2> takeEList(l2: List<E2>)
+    ^
