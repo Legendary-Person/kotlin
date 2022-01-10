@@ -47,14 +47,9 @@ class JavaModuleGraph(finder: JavaModuleFinder) {
                     // Do nothing; all automatic modules should be added to compilation roots at call site as per java.lang.module javadoc
                 }
                 is JavaModule.Explicit -> {
-                    if (module.isJdkModule) {
-                        //ct.sym can miss some internal modules from non-transitive dependencies
-                        dfs(moduleName)
-                    } else {
-                        for ((dependencyModuleName) in module.moduleInfo.requires) {
-                            if (visited.add(dependencyModuleName)) {
-                                dfs(dependencyModuleName)
-                            }
+                    for ((dependencyModuleName) in module.moduleInfo.requires) {
+                        if (visited.add(dependencyModuleName)) {
+                            dfs(dependencyModuleName)
                         }
                     }
                 }
