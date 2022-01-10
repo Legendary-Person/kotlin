@@ -891,21 +891,21 @@ task empty_substring(type: KonanLocalTest) {
 
 standaloneTest("cleaner_basic") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_basic.kt"
     flags = ['-tr', '-opt-in=kotlin.native.internal.InternalForKotlinNative']
 }
 
 standaloneTest("cleaner_workers") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_workers.kt"
     flags = ['-tr', '-opt-in=kotlin.native.internal.InternalForKotlinNative']
 }
 
 standaloneTest("cleaner_in_main_with_checker") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_in_main_with_checker.kt"
     useGoldenData = true
 }
@@ -924,7 +924,7 @@ standaloneTest("cleaner_leak_without_checker") {
 
 standaloneTest("cleaner_leak_with_checker") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_leak_with_checker.kt"
     expectedExitStatusChecker = { it != 0 }
     outputChecker = { s -> (s =~ /Cleaner (0x)?[0-9a-fA-F]+ was disposed during program exit/).find() }
@@ -937,7 +937,7 @@ standaloneTest("cleaner_in_tls_main_without_checker") {
 
 standaloneTest("cleaner_in_tls_main_with_checker") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_in_tls_main_with_checker.kt"
     expectedExitStatusChecker = { it != 0 }
     outputChecker = { s -> (s =~ /Cleaner (0x)?[0-9a-fA-F]+ was disposed during program exit/).find() }
@@ -945,7 +945,7 @@ standaloneTest("cleaner_in_tls_main_with_checker") {
 
 standaloneTest("cleaner_in_tls_worker") {
     enabled = (project.testTarget != 'wasm32') && // Cleaners need workers
-        !isNoopGC
+        !isNoopGC && false
     source = "runtime/basic/cleaner_in_tls_worker.kt"
     flags = ['-opt-in=kotlin.native.internal.InternalForKotlinNative']
 }
@@ -4772,7 +4772,7 @@ standaloneTest("interop_opengl_teapot") {
 
 if (PlatformInfo.isAppleTarget(project)) {
     interopTest("interop_objc_smoke") {
-        enabled = !isNoopGC
+        enabled = !isNoopGC && false
         source = "interop/objc/smoke.kt"
         interop = 'objcSmoke'
         doBeforeBuild {
@@ -4823,6 +4823,7 @@ if (PlatformInfo.isAppleTarget(project)) {
     }
 
     interopTestMultifile("interop_objc_tests") {
+        enabled = false
         source = "interop/objc/tests/"
         interop = 'objcTests'
         flags = ['-tr', '-e', 'main']
@@ -4968,7 +4969,7 @@ if (PlatformInfo.isAppleTarget(project)) {
     }
 
     interopTest("interop_objc_kt42172") {
-        enabled = !isNoopGC
+        enabled = !isNoopGC && false
         source = "interop/objc/kt42172/main.kt"
         interop = "objc_kt42172"
         flags = ['-opt-in=kotlin.native.internal.InternalForKotlinNative']
@@ -5115,7 +5116,7 @@ dynamicTest("interop_kt42397") {
 }
 
 dynamicTest("interop_cleaners_main_thread") {
-    disabled = (project.testTarget == 'wasm32') || isNoopGC // wasm doesn't support -produce dynamic
+    disabled = true //(project.testTarget == 'wasm32') || isNoopGC // wasm doesn't support -produce dynamic
     source = "interop/cleaners/cleaners.kt"
     cSource = "$projectDir/interop/cleaners/main_thread.cpp"
     clangTool = "clang++"
@@ -5295,6 +5296,7 @@ Task frameworkTest(String name, Closure<FrameworkTest> configurator) {
 
 if (isAppleTarget(project)) {
     frameworkTest('testObjCExport') {
+        enabled = false
         final String frameworkName = 'Kt'
         final String dir = "$testOutputFramework/testObjCExport"
         final File lazyHeader = file("$dir/$target-lazy.h")
@@ -5357,6 +5359,7 @@ if (isAppleTarget(project)) {
     }
 
     frameworkTest('testObjCExportNoGenerics') {
+        enabled = false
         final String frameworkName = 'KtNoGenerics'
         final String frameworkArtifactName = 'Kt'
         final String dir = "$testOutputFramework/testObjCExportNoGenerics"
@@ -5412,6 +5415,7 @@ if (isAppleTarget(project)) {
     }
 
     frameworkTest('testObjCExportLegacySuspendUnit') {
+        enabled = false
         final String frameworkName = 'KtLegacySuspendUnit'
         final String frameworkArtifactName = 'Kt'
         final String dir = "$testOutputFramework/testObjCExportLegacySuspendUnit"
@@ -5467,6 +5471,7 @@ if (isAppleTarget(project)) {
     }
 
     frameworkTest('testObjCExportStatic') {
+        enabled = false
         final String frameworkName = 'KtStatic'
         final String frameworkArtifactName = 'Kt'
         final String libraryName = frameworkName + "Library"
