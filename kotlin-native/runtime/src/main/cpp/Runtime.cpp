@@ -360,6 +360,7 @@ KInt Konan_Platform_getAvailableProcessors() {
 #else
     auto res = std::thread::hardware_concurrency();
     // C++ standard says that if this function can return 0 if value is not "well defined or not computable"
+    // In current libstdc++ implementation, seems it can happen only on unsupported targets.
     // We consider such systems as single-threaded
     if (res == 0) {
         res = 1;
