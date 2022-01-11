@@ -933,6 +933,12 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirErrors.WRONG_EXTENSION_FUNCTION_TYPE) { firDiagnostic ->
+        WrongExtensionFunctionTypeImpl(
+            firDiagnostic as KtPsiDiagnostic,
+            token,
+        )
+    }
     add(FirErrors.OPT_IN_USAGE) { firDiagnostic ->
         OptInUsageImpl(
             firDiagnostic.a,
